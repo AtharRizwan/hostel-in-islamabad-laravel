@@ -1,0 +1,36 @@
+/* Import general styles from main stylesheet */
+@import url('styles.css');
+
+/* Specific styles for Product X page */
+.product-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 5%;
+    margin: 3vw 7vw;
+    background-color: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    color: #000;
+}
+
+.product-details h1 {
+    font-size: xx-large;
+    color: var(--green);
+    margin-bottom: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-details {
+        margin: 5vw 3vw;
+        padding: 7%;
+    }
+}
+

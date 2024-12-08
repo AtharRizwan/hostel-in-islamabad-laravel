@@ -1,0 +1,383 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
+
+:root {
+    /* Colour theme */
+    --red: #F23D4C;
+    --green: #83A603;
+    --dark_green: #6E8C03;
+    --light_green: #BFF207;
+    --white: #F2F2F2;
+    --background: #E2E2E2;
+    --black: #000;
+    --trans: all 0.4s ease 0s;
+    --deg: -86deg;
+}
+
+:root {
+	--yellow: #bff207;
+	--dark: #2f313a;
+	--deg: -86deg;
+	--trans: all 0.4s ease 0s;
+}
+
+.reviews {
+  width:55%;
+	margin: auto;
+  margin-bottom: 20px;
+  border-radius:3% 0% 2%;
+	padding: 0;
+	overflow-x: hidden;
+	display: flex;
+	justify-content: center;
+	font-family: "Lato", Arial, Helvetica, serif;
+	background: linear-gradient(90deg, #131417, var(--dark) 35% 65%, #131417);
+	font-size: 1em;
+}
+
+/* Responsive Design */
+@media (max-width: 1000px) {
+  .reviews{
+    width:90%;
+  }
+}
+
+.reviews *,
+.reviews *:before,
+.reviews *:after {
+	box-sizing: border-box;
+}
+
+.reviews .content {
+	width: 90vmin;
+}
+
+.reviews h2 {
+	text-align: center;
+}
+
+.reviews .team {
+	padding: 2em 0 2em 2.5em;
+	margin: 0;
+}
+
+.reviews .member {
+	margin: 1.5em 0 0.5em;
+	padding: 0.73em;
+	background: linear-gradient(
+		83deg,
+		var(--yellow) 0 97%,
+		#fff0 calc(97% + 1px) 100%
+	);
+	position: relative;
+	list-style: none;
+	display: inline-block;
+	transform: scale(0.85);
+	transition: var(--trans);
+}
+
+.reviews .member:nth-of-type(even) {
+	text-align: right;
+	background: linear-gradient(
+		-83deg,
+		var(--yellow) 0 97%,
+		#fff0 calc(97% + 1px) 100%
+	);
+}
+
+.reviews .thumb {
+	width: 13vmin;
+	height: 13vmin;
+	float: left;
+	margin-right: 1.25em;
+	background: linear-gradient(
+		var(--deg),
+		var(--dark) 0 70%,
+		var(--yellow) 0% 100%
+	);
+	transform: rotate(-4deg);
+	transition: var(--trans);
+	border-radius: 0.25em;
+	overflow: hidden;
+	margin-left: -3em;
+	padding: 0.5em;
+}
+
+.reviews .member:nth-of-type(even) .thumb {
+	--deg: 86deg;
+	float: right;
+	margin-left: 2em;
+	margin-right: -3em;
+	transform: rotate(4deg);
+}
+
+.reviews .thumb img {
+	width: 100%;
+	height: 100%;
+	border-radius: 0.25em;
+	filter: grayscale(1);
+	background: var(--dark);
+}
+
+.reviews .member:hover {
+	transform: scale(1);
+	transition: var(--trans);
+	filter: drop-shadow(0px 20px 10px #0008);
+}
+
+.reviews .member:hover .thumb {
+	padding: 0.1em;
+	transition: var(--trans);
+	transform: rotate(-1deg);
+	--deg: -89deg;
+}
+
+.reviews .member:nth-of-type(even):hover .thumb {
+	--deg: 91deg;
+}
+
+.reviews .member:hover .thumb img {
+	filter: none;
+	transition: var(--trans);
+}
+
+.reviews .description {
+	padding-top: 1vmin;
+}
+
+.reviews .description p {
+	padding: 0 2em;
+	margin-bottom: 1em;
+}
+
+.reviews h3 {
+	background: linear-gradient(182deg, #fff0 60%, var(--dark) 0 100%);
+	display: inline;
+	transform: rotate(-2deg);
+	position: absolute;
+	margin: 0;
+	margin-top: -2.25em;
+	left: 9vmin;
+	padding: 0.5em 0.75em;
+	color: var(--yellow);
+	border-radius: 0.25em;
+	font-size: 1.35em;
+	transform-origin: left bottom;
+}
+
+.reviews .member:nth-of-type(even) h3 {
+	left: inherit;
+	right: 9vmin;
+	transform: rotate(2deg);
+	transform-origin: right bottom;
+	background: linear-gradient(-182deg, #fff0 60%, var(--dark) 0 100%);
+}
+
+.reviews .member:hover h3 {
+	transition: var(--trans);
+	transform: rotate(0deg);
+	background: linear-gradient(180deg, #fff0 59%, var(--dark) 0 100%);
+}
+
+.reviews .co-funder:after {
+	content: "GOLD-MEMBER";
+	font-size: 0.75em;
+	position: absolute;
+	top: -1.5em;
+	background: var(--yellow);
+	right: 4em;
+	transform: rotate(3deg);
+	padding: 0.35em 0.75em 0.5em;
+	border-radius: 0.25em;
+	color: var(--dark);
+	font-weight: bold;
+}
+
+.reviews .co-funder:nth-of-type(even):after {
+	right: inherit;
+	left: 4em;
+	transform: rotate(-3deg);
+}
+
+.reviews .description p a {
+	display: inline-block;
+	margin: 0.5em 0 0 0;
+	background: var(--dark);
+	color: var(--yellow);
+	padding: 0.1em 0.5em 0.35em;
+	border-radius: 0.5em;
+	text-decoration: none;
+	transition: var(--trans);
+}
+.reviews .description p a:hover {
+	transition: var(--trans);
+	color: var(--dark);
+	background: var(--yellow);
+	font-weight: bold;
+}
+
+.reviews .description p a img {
+	float: left;
+	width: 22px;
+	filter: invert(1);
+	border-radius: 0.15em;
+	padding: 2px;
+	background: #fff;
+	margin-right: 2px;
+}
+
+.container {
+  width:55%;
+  height: 500px;
+	margin: auto;
+  margin-bottom: 20px;
+	overflow-x: hidden;
+	justify-content: center;
+	background: white;
+}
+
+.container .form_text{
+  padding:10px;
+  text-align: center;
+  font-size: 41px;
+  font-weight: 600;
+  color: var(--red);
+}
+
+.container form{
+  padding: 30px 0 0 0;
+}
+.container form .form-row{
+  display: flex;
+  margin: 32px 0;
+}
+form .form-row .input-data{
+  width: 100%;
+  height: 40px;
+  margin: 0 20px;
+  position: relative;
+}
+form .form-row .textarea{
+  height: 70px;
+}
+.input-data input,
+.textarea textarea{
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 17px;
+  border-bottom: 2px solid rgba(0,0,0, 0.12);
+}
+.input-data input:focus ~ label, .textarea textarea:focus ~ label,
+.input-data input:valid ~ label, .textarea textarea:valid ~ label{
+  transform: translateY(-24px);
+  font-size: 10px;
+  color: var(--dark_green);
+}
+.textarea textarea{
+  resize: none;
+  padding-top: 10px;
+}
+.input-data label{
+  position: absolute;
+  pointer-events: none;
+  padding-left:3px;
+  bottom: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+.textarea label{
+  width: 100%;
+  bottom: 40px;
+  background: #fff;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.input-data .underline{
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+}
+.input-data .underline:before{
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: 100%;
+  background: #3498db;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.input-data input:focus ~ .underline:before,
+.input-data input:valid ~ .underline:before,
+.textarea textarea:focus ~ .underline:before,
+.textarea textarea:valid ~ .underline:before{
+  transform: scale(1);
+}
+.submit-btn .input-data{
+  overflow: hidden;
+  height: 45px!important;
+  width: 20%!important;
+}
+.submit-btn .input-data .inner{
+  height: 100%;
+  width: 200%;
+  position: absolute;
+  left: -50%;
+  background: -webkit-linear-gradient(right, var(--light_green), var(--green), #56d8e4);
+  transition: all 0.4s;
+}
+.submit-btn .input-data:hover .inner{
+  left: 0;
+}
+.submit-btn .input-data input{
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1vw;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.form-row .alert{
+  justify-content: center;
+  margin:auto;
+  color:red;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    width:90%;
+    height:700px;
+  }
+  .container .text{
+    font-size: 30px;
+  }
+  .container form{
+    padding: 10px 0 0 0;
+    margin:20px;
+  }
+  .container form .form-row{
+    display: block;
+  }
+  form .form-row .input-data{
+    margin: 35px 0!important;
+  }
+  .submit-btn .input-data{
+    width: 40%!important;
+  }
+  .submit-btn .input-data input{
+    font-size: 15px;
+  }
+}
