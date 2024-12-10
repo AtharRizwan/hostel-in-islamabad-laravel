@@ -63,6 +63,12 @@ main button:active {
     
 }
 
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .navbar img {
     width: 100px;
     padding: 10px;

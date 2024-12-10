@@ -4,19 +4,19 @@
 
 @section('content')
 <section class="login-section">
-    <div class="form-container">
-        <h1>Login to Your Account</h1>
+    <div style="display: flex; justify-content:center; flex-direction:column; align-items:center; width: 100vw; height: 100vh" class="form-container">
+        <h1 style="padding: 20px">Login to Your Account</h1>
         <form action="{{ route('login') }}" method="POST">
             @csrf
-            <div class="form-group">
+            <div style="padding: 10px" class="form-group">
                 <label for="email">Email Address</label>
                 <input type="email" name="email" id="email" placeholder="Enter your email" required>
             </div>
-            <div class="form-group">
+            <div style="padding: 10px" class="form-group">
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" placeholder="Enter your password" required>
             </div>
-            <div class="form-options">
+            <div style="padding: 10px" class="form-options">
                 <div>
                     <input type="checkbox" name="remember" id="remember">
                     <label for="remember">Remember Me</label>

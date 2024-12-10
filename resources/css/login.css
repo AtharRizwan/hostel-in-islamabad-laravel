@@ -9,7 +9,16 @@
     padding: 20px;
 }
 
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #ffffff;
     padding: 40px;
     border-radius: 8px;
