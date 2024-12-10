@@ -3,6 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/login', function() {
+    return "hello world";
+})->name('login');
+
 Route::get('/home', function () {
     return view('pages.home');
 })->name('home');
