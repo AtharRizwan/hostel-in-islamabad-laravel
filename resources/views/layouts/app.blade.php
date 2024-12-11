@@ -9,7 +9,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/styles.css', 'resources/css/about.css', 'resources/css/services.css', 'resources/css/product_x.css',
-        'resources/css/reviews.css'], 'resources/css/login.css') <!-- 'resources/js/script.js', 'resources/js/reviews.js']) -->
+        'resources/css/reviews.css', 'resources/css/login.css']) <!-- 'resources/js/script.js', 'resources/js/reviews.js']) -->
     </head>
     <body>
         @include('partials.header')
