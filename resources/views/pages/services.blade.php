@@ -11,31 +11,13 @@
 <section class="services-grid">
     <h2>Available Services</h2>
     <div class="grid-container">
-        <a href="product_pudding.html" class="service-item">
-            <img src="{{ asset('img/pudding.jpg') }}" alt="Hot Chocolate Pudding">
-            <h3>Hot Chocolate Pudding @ 8 PM</h3>
-            <p>End your day with our signature dessert at 8 PM.</p>
-        </a>
-        <a href="product_breakfast.html" class="service-item">
-            <img src="{{ asset('img/breakfast.jpg') }}" alt="Fresh Breakfast">
-            <h3>Freshly Baked Bread & Breakfast (7 AM - 9 AM)</h3>
-            <p>Enjoy our delicious breakfast to start your day fresh.</p>
-        </a>
-        <a href="product_bike.html" class="service-item">
-            <img src="{{ asset('img/bike.jpg') }}" alt="Bike Hire">
-            <h3>Bike Hire</h3>
-            <p>Explore the city by renting our bikes at affordable rates.</p>
-        </a>
-        <a href="product_pickup.html" class="service-item">
-            <img src="{{ asset('img/pickup.jpg') }}" alt="Free Pick-up & Drop-off">
-            <h3>Free Pick-up & Drop-off</h3>
-            <p>We offer free transportation to ensure your convenience.</p>
-        </a>
-        <a href="product_events.html" class="service-item">
-            <img src="{{ asset('img/events.jpg') }}" alt="Fun Events">
-            <h3>Fun Local Events</h3>
-            <p>Participate in exciting events happening in the local area.</p>
-        </a>
+        @foreach ($services as $service)
+            <a href="{{ route('service.show', $service->id) }}" class="service-item">
+            <img src="{{ asset($service->image_link) }}" alt="{{ $service->name }}">
+            <h3>{{ $service->name }} @ 8 PM</h3>
+            <p>{{ $service->description }}</p>
+            </a>
+        @endforeach
     </div>
 </section>
 
@@ -50,26 +32,12 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($services as $service)
             <tr>
-                <td>Hot Chocolate Pudding @ 8 PM</td>
-                <td>Rs 500 per serving</td>
+                <td>{{ $service->name }}</td>
+                <td>{{ $service->price }} per serving</td>
             </tr>
-            <tr>
-                <td>Freshly Baked Bread & Breakfast (7 AM - 9 AM)</td>
-                <td>Rs 1000 per person</td>
-            </tr>
-            <tr>
-                <td>Bike Hire</td>
-                <td>Rs 150 per day</td>
-            </tr>
-            <tr>
-                <td>Free Pick-up & Drop-off</td>
-                <td>Complimentary</td>
-            </tr>
-            <tr>
-                <td>Fun Local Events</td>
-                <td>Varies by event</td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
 </section>
@@ -79,48 +47,15 @@
 <div class="reviews">
     <div class="content">
         <ul class="team">
-            <li class="member co-funder">
-                <div class="thumb"><img
-                        src="https://assets.codepen.io/3/internal/avatars/users/default.png?fit=crop&format=auto&height=120&width=120">
-                </div>
-                <div class="description">
-                    <h3>Chris Coyier</h3>
-                    <p>Oh, I love the amazing hot chocolate pudding i get at exactly 8pm. They never get late or miss
-                        serving it hot. Amazing service 10/10 would recommend. <br><a
-                            href="https://codepen.io/chriscoyier/">@chriscoyier</a></p>
-                </div>
-            </li>
-            <li class="member co-funder">
-                <div class="thumb"><img
-                        src="https://assets.codepen.io/2/internal/avatars/users/default.png?height=120&width=120"></div>
-                <div class="description">
-                    <h3>Alex Vazquez</h3>
-                    <p>I am a big fan of their freshly baked bread and breakfast that is served from 7AM to 9AM. I do
-                        not like the pricing, but hopefully we can expect better pricing for them soon enough :)<br><a
-                            href="https://codepen.io/quezo/">@quezo</a></p>
-                </div>
-            </li>
-            <li class="member">
-                <div class="thumb"><img
-                        src="https://assets.codepen.io/652/internal/avatars/users/default.png?height=120&width=120">
-                </div>
-                <div class="description">
-                    <h3>Marie Mosley</h3>
-                    <p>I really like the Mausami ka Juice that they offer. The drink is one of the best drinks I have
-                        ever had and quenches my thirst immediately after a long summer day! <br><a
-                            href="https://codepen.io/mariemosley/">@mariemosley</a></p>
-                </div>
-            </li>
-            <li class="member">
-                <div class="thumb"><img
-                        src="https://assets.codepen.io/39255/internal/avatars/users/default.png?height=120&width=120">
-                </div>
-                <div class="description">
-                    <h3>Stephen Shaw</h3>
-                    <p>Good! I really like the overall setup. Especially the view, it is amazing. I like to sit by the
-                        beach to wait for my chaeuffuer<br><a href="https://codepen.io/shshaw/">@shshaw</a></p>
-                </div>
-            </li>
+            @foreach ($reviews as $review)
+                <li class="{{ $review->position }}">
+                    <div class="thumb"><img src="https://assets.codepen.io/39255/internal/avatars/users/default.png?height=120&width=120"></div>
+                    <div class="description">
+                        <h3>{{ $review->name }}</h3>
+                        <p>{{ $review->text }}<br><a href="{{ $review->website }}">@ {{ $review->username }}</a></p>
+                    </div>
+                </li>
+            @endforeach
         </ul>
     </div>
 </div>
