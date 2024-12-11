@@ -57,7 +57,7 @@
 }
 
 .form-group input {
-    width: 100%;
+    width: 300px;
     padding: 10px 12px;
     font-size: 1rem;
     border: 1px solid #ddd;
@@ -92,7 +92,7 @@
 }
 
 .login-btn {
-    width: 100%;
+    width: 220px;
     padding: 12px;
     font-size: 1rem;
     /* background-color: #007bff; */
@@ -104,7 +104,7 @@
 }
 
 .register-btn {
-    width: 100%;
+    width: 220px;
     padding: 12px;
     font-size: 1rem;
     /* background-color: #007bff; */
