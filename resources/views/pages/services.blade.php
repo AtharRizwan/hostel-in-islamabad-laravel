@@ -50,11 +50,20 @@
     <div class="content">
         <ul class="team">
             @foreach ($reviews as $review)
-                <li class="{{ $review->position }}">
+                <li class="{{ $review->position }}" id="review-{{ $review->id }}">
                     <div class="thumb"><img src="https://assets.codepen.io/39255/internal/avatars/users/default.png?height=120&width=120"></div>
                     <div class="description">
                         <h3>{{ $review->name }}</h3>
-                        <p>{{ $review->text }}<br><a href="{{ $review->website }}">@ {{ $review->username }}</a></p>
+                        @if (Auth::check() && Auth::id() === $review->user_id)
+                            <p contenteditable="true">{{ $review->text }}<br><a href="{{ $review->website }}">@ {{ $review->username }}</a></p>
+                            <!-- Only show delete button for the review owner -->
+                            <form action="{{ route('reviews.delete', $review->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        @else
+                            <p contenteditable="false">{{ $review->text }}<br><a href="{{ $review->website }}">@ {{ $review->username }}</a></p>
+                        @endif
                     </div>
                 </li>
             @endforeach
@@ -65,50 +74,35 @@
     <h2>Add Review</h2>
 </div>
 <div class="container">
-    <form action="#">
+    <form action="{{ url('/services') }}" method='POST'>
+        @csrf
         <div class="form-row">
             <div class="input-data">
-                <input id="first_name" type="text" required>
+                <input id="url" type="text" name="url" value="{{ old('url') }}" required>
                 <div class="underline"></div>
-                <label for=""> First Name</label>
-            </div>
-            <div class="input-data">
-                <input id="last_name" type="text" required>
-                <div class="underline"></div>
-                <label for=""> Last Name</label>
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="input-data">
-                <input id="username" type="text" required>
-                <div class="underline"></div>
-                <label for=""> Username</label>
-            </div>
-            <div class="input-data">
-                <input id="url" type="text" required>
-                <div class="underline"></div>
-                <label for=""> Website URL</label>
+                <label for=""> Portfolio URL</label>
             </div>
         </div>
         <div class="form-row">
             <div class="input-data textarea">
-                <textarea rows="8" cols="80" required></textarea>
+                <textarea rows="8" cols="80" name="review" value="{{ old('review') }}" required></textarea>
                 <br />
                 <div class="underline"></div>
                 <label for=""> Write your Review</label>
                 <br />
-                <div class="form-row">
-                    <div id="warning" class="alert">
-                    </div>
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
+                @endif
                 <div class="form-row submit-btn">
                     <div class="input-data">
                         <div class="inner"></div>
-                        <input id="addReviewButton" type="button" value="Add Review">
-                    </div>
-                    <div class="input-data">
-                        <div class="inner"></div>
-                        <input id="removeReviewButton" type="button" value="Remove Review">
+                        <input id="addReviewButton" type="submit" value="Add Review">
                     </div>
                 </div>
             </div>
