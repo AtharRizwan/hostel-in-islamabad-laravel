@@ -133,3 +133,16 @@
 .signup-prompt a:hover {
     text-decoration: underline;
 }
+
+/* Center the logo and make it smaller */
+.login-logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 150px; /* Adjust to your desired size */
+    height: auto;
+    padding: 10px;
+}
+
+.logo-container {
+    background-color: #F9F9F9;
+}

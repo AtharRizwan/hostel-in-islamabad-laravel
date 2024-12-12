@@ -3,6 +3,11 @@
 @section('title', 'Register - Hostel in Islamabad')
 
 @section('content')
+<!-- Centered and resized logo image -->
+<div class="logo-container">
+    <img src="{{ asset('img/logo.png') }}" alt="Hostel in Islamabad" class="login-logo">
+ </div>
+ 
 <section class="register-section">
     <div class="form-container">
         <h1>Create a New Account</h1>
