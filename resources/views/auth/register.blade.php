@@ -11,6 +11,28 @@
 <section class="register-section">
     <div class="form-container">
         <h1>Create a New Account</h1>
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        <!-- Validation Errors -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form action="{{ route('register') }}" method="POST">
             @csrf
             <div class="form-group">
@@ -21,7 +43,7 @@
                 <label for="email">Email Address</label>
                 <input type="email" name="email" id="email" placeholder="Enter your email" required>
             </div>
-            <div class="form-group">
+            <div class="form-group">    
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" placeholder="Enter your password" required>
             </div>
