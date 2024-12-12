@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AddReview;
 use Illuminate\Support\Facades\Route;
 use App\Models\Service;
 use App\Models\Review;
@@ -22,6 +23,8 @@ Route::get('/services', function () {
     $reviews = Review::all();
     return view('pages.services', compact('services', 'reviews'));
 })->name('services');
+
+Route::post('/services', [AddReview::class, 'add'])->name('services.add');
 
 Route::get('/services/{service}', function (Service $service) {
     return view('pages.service', compact('service'));
