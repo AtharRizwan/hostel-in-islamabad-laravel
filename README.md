@@ -1,7 +1,7 @@
 # Group Members: 
 Muhammad Athar (408369)\
 Muhammad Arsalan Khan (410963)\
-Muhammad Saad Ashraf (424991)\
+Muhammad Saad Ashraf (424991)
 
 # GitHub Repo Link:
 [https://github.com/AtharRizwan/hostel-in-islamabad-laravel](https://github.com/AtharRizwan/hostel-in-islamabad-laravel)
