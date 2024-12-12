@@ -17,7 +17,7 @@
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
-                        <script>alert("{{ $error }}")</script>
+                        <li>{{ $error }}</li>
                     @endforeach
                 </ul>
             </div>
@@ -38,7 +38,6 @@
                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                     <label for="remember">Remember Me</label>
                 </div>
-                <a href="{{ route('password.request') }}" class="forgot-password">Forgot Password?</a>
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>
