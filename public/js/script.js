@@ -97,29 +97,3 @@ document.getElementById('contact-form').onsubmit = function (event) {
     } 
 };
 
-function showLogoutModal() {
-    document.getElementById('logoutModal').style.display = 'flex';
-}
-
-function hideLogoutModal() {
-    document.getElementById('logoutModal').style.display = 'none';
-}
-async function confirmLogout() {
-hideLogoutModal();
-try {
-    const response = await fetch("{{ route('logout') }}", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-    });
-
-    window.location.href = "{{ route('login') }}"; // Redirect to login
-
-    alert("Successfully Logged out");
-} catch (error) {
-    console.error("Logout error:", error);
-    alert("An error occurred. Please try again.");
-}
-}
