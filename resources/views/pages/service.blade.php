@@ -2,6 +2,8 @@
 
 @section('title', 'Services - Hostel in Islamabad')
 
+@include('partials.header')
+
 @section('content')
 <main>
     <section class="product-details">

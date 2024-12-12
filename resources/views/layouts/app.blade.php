@@ -12,7 +12,6 @@
         'resources/css/reviews.css', 'resources/css/login.css']) <!-- 'resources/js/script.js', 'resources/js/reviews.js']) -->
     </head>
     <body>
-        @include('partials.header')
         <!-- Page Content -->
         <main>
             @yield('content')
