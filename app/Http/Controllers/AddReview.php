@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 class AddReview extends Controller
 {
-    public function add(Request $request)
+    public function add(Request $request):RedirectResponse
     {
         Log::info('AddReview::add');
         $request->validate([
@@ -28,8 +28,24 @@ class AddReview extends Controller
         $review->website = $request->input('url');
         $review->position = 'member';
         $review->username = Auth::user()->email;
+        $review->user_id = Auth::user()->id;
         $review->save();
 
         return redirect()->back()->with('success', 'Review added successfully');
+    }
+    public function delete($id):RedirectResponse
+    {
+        // Find the review by ID
+        $review = Review::find($id);
+
+        // Check if the review exists and belongs to the current user
+        if (!$review || $review->user_id !== Auth::user()->id) {
+            return redirect()->back()->with('error', 'You are not authorized to delete this review.');
+        }
+
+        // Delete the review
+        $review->delete();
+
+        return redirect()->back()->with('success', 'Review deleted successfully!');
     }
 }

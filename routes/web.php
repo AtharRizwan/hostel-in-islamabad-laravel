@@ -24,7 +24,10 @@ Route::get('/services', function () {
     return view('pages.services', compact('services', 'reviews'));
 })->name('services');
 
-Route::post('/services', [AddReview::class, 'add'])->name('services.add');
+Route::post('/services', [AddReview::class, 'add'])->name('reviews.add');
+
+Route::post('/reviews/{id}', [AddReview::class, 'delete'])->name('reviews.delete');
+
 
 Route::get('/services/{service}', function (Service $service) {
     return view('pages.service', compact('service'));
