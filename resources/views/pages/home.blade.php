@@ -34,4 +34,9 @@
         </div>
     </div>
 </section>
+@if (Auth::check() && Auth::user()->role === 'admin'){
+<section class="services-intro">
+    <h1 class="color-change">Admin Access</h1>
+</section>
+@endif
 @endsection

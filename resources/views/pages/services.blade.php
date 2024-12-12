@@ -5,14 +5,18 @@
 @include('partials.header')
 
 @section('content')
+@if (Auth::check() && Auth::user()->role === 'admin'){
+<section class="services-intro">
+    <h1 class="color-change">Admin Access</h1>
+    <p>You are currently logged in as an admin, kindly click a service to edit it</p>
+    <p>You can delete any review!</p>
+</section>
+
+@else
 <section class="services-intro">
     <h1 class="color-change">Our Services</h1>
     <p>Explore the amazing services we offer to enhance your stay!</p>
 </section>
-
-
-@if (Auth::check() && Auth::user()->role === 'admin'){
-    <h3>You are logged in as admin, click a service to edit it</h3>
 @endif
 
 <section class="services-grid">
@@ -59,7 +63,7 @@
                     <div class="thumb"><img src="https://assets.codepen.io/39255/internal/avatars/users/default.png?height=120&width=120"></div>
                     <div class="description">
                         <h3>{{ $review->name }}</h3>
-                        @if (Auth::check() && Auth::id() === $review->user_id)
+                        @if (Auth::check() && (Auth::id() === $review->user_id || Auth::user()->role === 'admin'))
                             <!-- Only show delete button for the review owner -->
                             <form action="{{ route('reviews.delete', $review->id) }}" method="POST" style="display: inline;">
                                 @csrf
