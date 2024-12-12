@@ -39,7 +39,7 @@ class AddReview extends Controller
         $review = Review::find($id);
 
         // Check if the review exists and belongs to the current user
-        if (!$review || $review->user_id !== Auth::user()->id) {
+        if (!$review || ($review->user_id !== Auth::user()->id && Auth::user()->role !== 'admin')) {
             return redirect()->back()->with('error', 'You are not authorized to delete this review.');
         }
 
