@@ -2,6 +2,8 @@
 
 @section('title', 'About - Hostel in Islamabad')
 
+@include('partials.header')
+
 @section('content')
 <section class="about-intro">
     <h1 class="color-change">About Us</h1>

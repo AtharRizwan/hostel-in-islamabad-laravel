@@ -1,23 +1,20 @@
 /* Login Page CSS */
+@import url('styles.css');
 
-.login-section {
+.login-section, .register-section{
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 120px); /* Adjust for header/footer */
-    background-color: #f9f9f9;
+    min-height: calc(100vh - 150px); /* Adjust for header/footer */
+    background-color: var(--background);
     padding: 20px;
-}
-
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .form-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    width: 100%;
     align-items: center;
     background-color: #ffffff;
     padding: 40px;
@@ -26,6 +23,10 @@
     width: 100%;
     max-width: 400px;
     text-align: center;
+}
+
+.form-options div,a {
+    padding: 5px;
 }
 
 .form-container h1 {
@@ -47,7 +48,7 @@
 }
 
 .form-group input {
-    width: 100%;
+    width: 300px;
     padding: 10px 12px;
     font-size: 1rem;
     border: 1px solid #ddd;
@@ -82,20 +83,32 @@
 }
 
 .login-btn {
-    width: 100%;
+    width: 220px;
     padding: 12px;
     font-size: 1rem;
-    background-color: #007bff;
+    /* background-color: #007bff; */
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    /* transition: background-color 0.3s; */
 }
 
-.login-btn:hover {
-    background-color: #0056b3;
+.register-btn {
+    width: 220px;
+    padding: 12px;
+    font-size: 1rem;
+    /* background-color: #007bff; */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    /* transition: background-color 0.3s; */
 }
+
+/* .login-btn:hover {
+    background-color: #0056b3;
+} */
 
 .signup-prompt {
     margin-top: 20px;
@@ -110,4 +123,39 @@
 
 .signup-prompt a:hover {
     text-decoration: underline;
+}
+
+/* Center the logo and make it smaller */
+.login-logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 150px; /* Adjust to your desired size */
+    height: auto;
+    padding: 10px;
+}
+
+.logo-container {
+    background-color: #F9F9F9;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
 }

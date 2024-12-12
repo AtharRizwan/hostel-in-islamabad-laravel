@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AddReview;
 use Illuminate\Support\Facades\Route;
+use App\Models\Service;
+use App\Models\Review;
 
 Route::get('/login', function() {
     return "hello world";
@@ -16,8 +19,20 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/services', function () {
-    return view('pages.services');
+    $services = Service::all();
+    $reviews = Review::all();
+    return view('pages.services', compact('services', 'reviews'));
 })->name('services');
+
+Route::post('/services', [AddReview::class, 'add'])->name('reviews.add');
+
+Route::post('/reviews/{id}', [AddReview::class, 'delete'])->name('reviews.delete');
+
+
+Route::get('/services/{service}', function (Service $service) {
+    return view('pages.service', compact('service'));
+})->name('service.show');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

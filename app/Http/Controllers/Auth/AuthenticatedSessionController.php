@@ -22,14 +22,28 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
+    /**
+     * Handle an incoming authentication request.
+     */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        try {
+            // Attempt to authenticate
+            $request->authenticate();
+            
+            // Regenerate session to prevent session fixation
+            $request->session()->regenerate();
 
-        $request->session()->regenerate();
-
-        return redirect()->intended(route('dashboard', absolute: false));
+            // Redirect to intended page after successful login
+            return redirect()->intended(route('home', absolute: false));
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Catch authentication failure
+            return back()
+                ->withErrors(['email' => 'The provided email or password is incorrect.'])
+                ->withInput($request->only('email', 'remember'));
+        }
     }
+
 
     /**
      * Destroy an authenticated session.
@@ -42,6 +56,16 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+    // Check if the request expects JSON (AJAX logout)
+    if ($request->expectsJson()) {
+        return response()->json([
+            'message' => 'Logout successful',
+            'status' => true,
+        ], 200);
+    }
+
+    // For non-AJAX requests, redirect with a success message
+    return redirect('/login')
+        ->with('success', 'Logout successful');
     }
 }

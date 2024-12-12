@@ -9,14 +9,15 @@
 
         <!-- Scripts -->
         @vite(['resources/css/styles.css', 'resources/css/about.css', 'resources/css/services.css', 'resources/css/product_x.css',
-        'resources/css/reviews.css'], 'resources/css/login.css') <!-- 'resources/js/script.js', 'resources/js/reviews.js']) -->
+        'resources/css/reviews.css', 'resources/css/login.css'])
     </head>
     <body>
-        @include('partials.header')
         <!-- Page Content -->
         <main>
             @yield('content')
         </main>
         @include('partials.footer')
     </body>
+    <script src="{{ asset('js/reviews.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </html>
