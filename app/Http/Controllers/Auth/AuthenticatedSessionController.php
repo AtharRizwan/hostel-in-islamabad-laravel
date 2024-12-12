@@ -39,7 +39,7 @@ class AuthenticatedSessionController extends Controller
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Catch authentication failure
             return back()
-                ->withErrors(['email' => 'The provided credentials do not match our records.'])
+                ->withErrors(['email' => 'The provided email or password is incorrect.'])
                 ->withInput($request->only('email', 'remember'));
         }
     }

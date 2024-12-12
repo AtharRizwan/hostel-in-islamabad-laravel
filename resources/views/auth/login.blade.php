@@ -6,11 +6,23 @@
 <section class="login-section">
     <div class="form-container">
         <h1>Login to Your Account</h1>
+
+        <!-- Display validation errors -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <script>alert("{{ $error }}")</script>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('login') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="email">Email Address</label>
-                <input type="email" name="email" id="email" placeholder="Enter your email" required>
+                <input type="email" name="email" id="email" placeholder="Enter your email"  required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
@@ -18,7 +30,7 @@
             </div>
             <div class="form-options">
                 <div>
-                    <input type="checkbox" name="remember" id="remember">
+                    <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                     <label for="remember">Remember Me</label>
                 </div>
                 <a href="{{ route('password.request') }}" class="forgot-password">Forgot Password?</a>
@@ -28,4 +40,5 @@
         <p class="signup-prompt">Don't have an account? <a href="{{ route('register') }}">Sign Up</a></p>
     </div>
 </section>
+
 @endsection
