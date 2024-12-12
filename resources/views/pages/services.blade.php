@@ -10,13 +10,18 @@
     <p>Explore the amazing services we offer to enhance your stay!</p>
 </section>
 
+
+@if (Auth::check() && Auth::user()->role === 'admin'){
+    <h3>You are logged in as admin, click a service to edit it</h3>
+@endif
+
 <section class="services-grid">
     <h2>Available Services</h2>
     <div class="grid-container">
         @foreach ($services as $service)
             <a href="{{ route('service.show', $service->id) }}" class="service-item">
             <img src="{{ asset($service->image_link) }}" alt="{{ $service->name }}">
-            <h3>{{ $service->name }} @ 8 PM</h3>
+            <h3>{{ $service->name }}</h3>
             <p>{{ $service->description }}</p>
             </a>
         @endforeach
@@ -55,15 +60,13 @@
                     <div class="description">
                         <h3>{{ $review->name }}</h3>
                         @if (Auth::check() && Auth::id() === $review->user_id)
-                            <p contenteditable="true">{{ $review->text }}<br><a href="{{ $review->website }}">@ {{ $review->username }}</a></p>
                             <!-- Only show delete button for the review owner -->
                             <form action="{{ route('reviews.delete', $review->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
-                        @else
-                            <p contenteditable="false">{{ $review->text }}<br><a href="{{ $review->website }}">@ {{ $review->username }}</a></p>
                         @endif
+                        <p contenteditable="false">{{ $review->text }}<br><a href="{{ $review->website }}">@ {{ $review->username }}</a></p>
                     </div>
                 </li>
             @endforeach

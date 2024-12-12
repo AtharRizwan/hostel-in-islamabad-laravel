@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AddReview;
+use App\Http\Controllers\UpdateService;
 use Illuminate\Support\Facades\Route;
 use App\Models\Service;
 use App\Models\Review;
