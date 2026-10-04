@@ -16,7 +16,7 @@ class RegistrationTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_new_users_can_register(): void
+    public function test_new_users_can_register_and_are_sent_to_login(): void
     {
         $response = $this->post('/register', [
             'name' => 'Test User',
@@ -25,7 +25,10 @@ class RegistrationTest extends TestCase
             'password_confirmation' => 'password',
         ]);
 
-        $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        // Registering doesn't log the user in; they log in afterwards
+        $this->assertGuest();
+        $response->assertRedirect(route('login', absolute: false));
+        $response->assertSessionHas('success');
+        $this->assertDatabaseHas('users', ['email' => 'test@example.com', 'role' => 'user']);
     }
 }

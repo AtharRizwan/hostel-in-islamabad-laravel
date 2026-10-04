@@ -4,48 +4,47 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Review;
-use Illuminate\Support\Facades\Log;
 
 class AddReview extends Controller
 {
-    public function add(Request $request):RedirectResponse
+    public function add(Request $request): RedirectResponse
     {
-        Log::info('AddReview::add');
-        $request->validate([
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|alpha_dash|max:30',
+            'url' => 'required|url:http,https|max:255',
             'review' => 'required|string|min:100|max:300',
-            'url' => 'required|url',
         ]);
-        Log::info('AddReview::add validated');
 
-        $review = new Review();
-        $review->name = Auth::user()->name;
-
-        Log::info('AddReview::add Auth::user()->name: ' . Auth::user()->name);
-
-        $review->text = $request->input('review');
-        $review->website = $request->input('url');
-        $review->position = 'member';
-        $review->username = Auth::user()->email;
-        $review->user_id = Auth::user()->id;
-        $review->save();
-
-        return redirect()->back()->with('success', 'Review added successfully');
-    }
-    public function delete($id):RedirectResponse
-    {
-        // Find the review by ID
-        $review = Review::find($id);
-
-        // Check if the review exists and belongs to the current user
-        if (!$review || ($review->user_id !== Auth::user()->id && Auth::user()->role !== 'admin')) {
-            return redirect()->back()->with('error', 'You are not authorized to delete this review.');
+        // Send the user back to the form (it sits at the bottom of the page) to see the errors
+        if ($validator->fails()) {
+            return redirect(route('services').'#add-review')->withErrors($validator)->withInput();
         }
 
-        // Delete the review
+        $validated = $validator->validated();
+
+        Review::create([
+            'user_id' => $request->user()->id,
+            'name' => $request->user()->name,
+            'username' => $validated['username'],
+            'website' => $validated['url'],
+            'text' => $validated['review'],
+            'position' => 'member',
+        ]);
+
+        return redirect(route('services').'#reviews')->with('success', 'Review added successfully.');
+    }
+
+    public function delete(Request $request, Review $review): RedirectResponse
+    {
+        // Only the review's author or an admin may delete it
+        if (! $review->canBeDeletedBy($request->user())) {
+            return redirect(route('services').'#reviews')->with('error', 'You are not authorized to delete this review.');
+        }
+
         $review->delete();
 
-        return redirect()->back()->with('success', 'Review deleted successfully!');
+        return redirect(route('services').'#reviews')->with('success', 'Review deleted successfully!');
     }
 }

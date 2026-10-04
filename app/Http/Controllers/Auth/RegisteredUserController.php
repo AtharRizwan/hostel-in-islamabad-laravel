@@ -44,8 +44,8 @@ class RegisteredUserController extends Controller
     
             event(new Registered($user));
     
-            // Flash success message
-            return back()->with('success', 'Registration successful.');
+            // Send the new user to the login page with a success message
+            return redirect()->route('login')->with('success', 'Registration successful, please log in.');
         } catch (\Exception $e) {
             // Flash error message
             return back()->with('error', 'Registration failed. Please try again.');

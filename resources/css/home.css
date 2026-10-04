@@ -1,0 +1,139 @@
+/* ==========================================================================
+   Home page
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
+.hero {
+    --heading_accent: var(--light_green);
+    --accent_text: var(--light_green);
+    --focus: var(--light_green);
+    display: flex;
+    align-items: center;
+    min-height: min(78vh, 640px);
+    color: #fff;
+    background:
+        linear-gradient(90deg, rgba(16, 20, 12, 0.9) 0%, rgba(16, 20, 12, 0.66) 45%, rgba(16, 20, 12, 0.2) 100%),
+        url('/img/hostel.jpg') center / cover no-repeat;
+}
+
+.hero-content {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.hero h1 {
+    max-width: 640px;
+}
+
+.hero .lead {
+    max-width: 520px;
+    margin-top: 16px;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.hero-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    margin-top: 40px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.hero-facts li::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: var(--light_green);
+    vertical-align: middle;
+}
+
+/* ---------- Testimonials ---------- */
+.quote-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.quote-card {
+    position: relative;
+    padding: 36px 32px 28px;
+}
+
+.quote-card::before {
+    content: '\201C';
+    position: absolute;
+    top: 6px;
+    left: 26px;
+    font-family: var(--font_heading);
+    font-size: 4.5rem;
+    line-height: 1;
+    color: var(--light_green);
+}
+
+.quote-card blockquote {
+    position: relative;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.quote-card figcaption {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* ---------- Call to action ---------- */
+.cta-band {
+    --heading_accent: var(--light_green);
+    --focus: var(--light_green);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 44px 48px;
+    border-radius: 20px;
+    color: #fff;
+    background:
+        radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.14), transparent 40%),
+        linear-gradient(135deg, var(--red) 0%, #8E1420 100%);
+}
+
+.cta-band p {
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+@media (max-width: 860px) {
+    .hero {
+        min-height: 0;
+        background:
+            linear-gradient(rgba(16, 20, 12, 0.78), rgba(16, 20, 12, 0.86)),
+            url('/img/hostel.jpg') center / cover no-repeat;
+    }
+
+    .hero-content {
+        padding-top: 56px;
+        padding-bottom: 56px;
+    }
+
+    .quote-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-band {
+        padding: 32px 26px;
+    }
+}

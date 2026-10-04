@@ -10,52 +10,71 @@ class ServiceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * Same content as the static site. Each line of long_description becomes
+     * a list item on the service page; **text** is shown in bold.
      */
     public function run(): void
     {
-        /**
-         * bike, breakfast, events, hostel, pudding, pickup
-         * all files .jpg
-         *
-         */
         Service::create([
-            'name' => 'Hot Chocolate Pudding @ 8PM',
-            'image_link'=> 'img/pudding.jpg',
-            'description'=> 'End your day with our signature dessert at 8PM',
-            'long_description'=> 'Indulge in our delicious, homemade hot chocolate pudding every evening at 8 PM. Perfect for a cozy end to your day, whether you\'re relaxing after an adventure or just craving something sweet., Made with rich chocolate and served warm to give you a comforting treat before bed.',
-            'price'=> 'Rs 500 per serving',
+            'name' => 'Hot Chocolate Pudding @ 8 PM',
+            'image_link' => 'img/pudding.jpg',
+            'description' => 'End your day with our signature dessert at 8 PM.',
+            'long_description' => implode("\n", [
+                '**Indulge** in our delicious, homemade hot chocolate pudding every evening at 8 PM.',
+                "Perfect for a cozy end to your day, whether you're relaxing after an adventure or just craving something sweet.",
+                'Made with **rich chocolate** and served warm to give you a comforting treat before bed.',
+            ]),
+            'price' => 'Rs 500 per serving',
         ]);
 
         Service::create([
-            'name' => 'Breakfast Buffet',
-            'image_link'=> 'img/breakfast.jpg',
-            'description'=> 'Start your day with a hearty breakfast',
-            'long_description'=> 'Start your day with a hearty breakfast at our restaurant. Our breakfast buffet includes a variety of options to suit every taste, from fresh fruit and yogurt to eggs, bacon, and more. Whether you prefer a light meal or a hearty feast, we have something for everyone. Join us every morning to fuel up for your day of adventure.',
-            'price'=> 'Rs 1000 per person',
+            'name' => 'Freshly Baked Bread & Breakfast (7 AM - 9 AM)',
+            'image_link' => 'img/breakfast.jpg',
+            'description' => 'Enjoy our delicious breakfast to start your day fresh.',
+            'long_description' => implode("\n", [
+                'Wake up to the **aroma of freshly baked bread** and a delicious breakfast served daily from 7 AM to 9 AM.',
+                'Our breakfast includes locally sourced ingredients and freshly brewed coffee or tea to kickstart your day.',
+                'Enjoy a **variety of options**, from warm pastries to healthy choices like fruits and yogurt.',
+            ]),
+            'price' => 'Rs 1000 per person',
         ]);
 
         Service::create([
-            'name' => 'Bike Rentals',
-            'image_link'=> 'img/bike.jpg',
-            'description'=> 'Explore the area on two wheels',
-            'long_description'=> 'Explore the area on two wheels with our bike rentals. Whether you want to take a leisurely ride around town or tackle some challenging trails, we have the perfect bike for you. Our rental fleet includes mountain bikes, road bikes, and more, so you can find the right fit for your adventure. Rent a bike today and start exploring!',
-            'price'=> 'Rs 500 per hour',
+            'name' => 'Bike Hire',
+            'image_link' => 'img/bike.jpg',
+            'description' => 'Explore the city by renting our bikes at affordable rates.',
+            'long_description' => implode("\n", [
+                'Explore the beautiful surroundings of Islamabad at your own pace with our **Bike Hire**.',
+                'We provide high-quality bikes, helmets, and safety gear, ensuring a fun and safe experience.',
+                'Prefer company? Join one of our guided rides through scenic routes, **highlighting local attractions** and hidden gems.',
+            ]),
+            'price' => 'Rs 150 per day',
         ]);
 
         Service::create([
-            'name' => 'Fun Local Events',
-            'image_link'=> 'img/events.jpg',
-            'description'=> 'Host your next event with us',
-            'long_description'=> 'Host your next event with us in our versatile event space. Whether you\'re planning a wedding, birthday party, corporate retreat, or any other gathering, our space is perfect for groups of all sizes. With customizable seating arrangements, state-of-the-art audiovisual equipment, and a dedicated event staff, we have everything you need to make your event a success. Contact us today to book your date!',
-            'price'=> 'Rs 5000 per hour'
+            'name' => 'Free Pick-up & Drop-off',
+            'image_link' => 'img/pickup.jpg',
+            'description' => 'We offer free transportation to ensure your convenience.',
+            'long_description' => implode("\n", [
+                '**Convenient and free transportation** for all our guests, available 24/7.',
+                "Whether you're arriving or leaving, we'll take care of your airport or bus station transfers.",
+                'Our **friendly drivers** ensure a smooth and comfortable ride, with no extra charge.',
+                'Ideal for travelers who want a **hassle-free start or end** to their stay with us.',
+            ]),
+            'price' => 'Complimentary',
         ]);
 
         Service::create([
-            'name'=> 'Free Pick-up & Drop-off',
-            'image_link'=> 'img/pickup.jpg',
-            'description'=> 'Let us take care of your transportation',
-            'long_description'=> 'Let us take care of your transportation with our free pick-up and drop-off service. Whether you\'re arriving by plane, train, or bus, we\'ll be there to greet you and take you to our hotel. Our friendly drivers will ensure you arrive safely and comfortably, so you can start your adventure stress-free. Contact us today to arrange your transportation!',
-            'price'=> 'Complimentary',
+            'name' => 'Fun Events',
+            'image_link' => 'img/events.jpg',
+            'description' => 'Join our weekly movie nights and games evenings with fellow travellers.',
+            'long_description' => implode("\n", [
+                'Unwind after a long day with our weekly **Movie Nights**, featuring popular films in a cozy atmosphere.',
+                'For those who enjoy socializing, we also host **Games Evenings** where guests can play a variety of board games and card games.',
+                "It's a great way to meet fellow travelers, make new friends, and have some fun together!",
+            ]),
+            'price' => 'Varies by event',
         ]);
     }
 }

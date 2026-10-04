@@ -1,48 +1,40 @@
 @extends('layouts.app')
 
-@section('title', 'Login - Hostel in Islamabad')
+@section('title', 'Log in - Hostel in Islamabad')
 
 @section('content')
-<!-- Centered and resized logo image -->
- <div class="logo-container">
-    <img src="{{ asset('img/logo.png') }}" alt="Hostel in Islamabad" class="login-logo">
- </div>
-
-<section class="login-section">
-    <div class="form-container">
-        <h1>Login to Your Account</h1>
-
-        <!-- Display validation errors -->
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+<section class="auth-page">
+    <div class="card auth-card">
+        <span class="eyebrow">Welcome back</span>
+        <h1 class="color-change">Log in</h1>
+        <p class="lead">Log in to explore our services and guest reviews.</p>
 
         <form action="{{ route('login') }}" method="POST">
             @csrf
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" name="email" id="email" placeholder="Enter your email"  required>
+            <div class="field">
+                <label for="email">Email address</label>
+                <input type="email" name="email" id="email" value="{{ old('email') }}" autocomplete="email" required autofocus
+                    @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>
+                @error('email')
+                    <span class="error-message" id="email-error">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="form-group">
+            <div class="field">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="Enter your password" required>
+                <input type="password" name="password" id="password" autocomplete="current-password" required
+                    @error('password') aria-invalid="true" aria-describedby="password-error" @enderror>
+                @error('password')
+                    <span class="error-message" id="password-error">{{ $message }}</span>
+                @enderror
             </div>
-            <div class="form-options">
-                <div>
-                    <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                    <label for="remember">Remember Me</label>
-                </div>
-            </div>
-            <button type="submit" class="login-btn">Login</button>
+            <label class="checkbox">
+                <input type="checkbox" name="remember" @checked(old('remember'))>
+                Remember me
+            </label>
+            <button type="submit" class="btn btn-primary">Log in</button>
         </form>
-        <p class="signup-prompt">Don't have an account? <a href="{{ route('register') }}">Sign Up</a></p>
+
+        <p class="auth-switch">Don't have an account? <a href="{{ route('register') }}">Sign up</a></p>
     </div>
 </section>
-
 @endsection

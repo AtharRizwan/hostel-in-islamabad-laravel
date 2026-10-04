@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AddReview;
 use App\Http\Controllers\UpdateService;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +13,9 @@ Route::get('/', function() {
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
-        return view('pages.home');
+        // The first three services are featured on the home page
+        $featured = Service::orderBy('id')->take(3)->get();
+        return view('pages.home', compact('featured'));
     })->name('home');
 
     Route::get('/about', function () {
@@ -27,22 +28,16 @@ Route::middleware('auth')->group(function () {
         return view('pages.services', compact('services', 'reviews'));
     })->name('services');
 
-    Route::post('/services', [AddReview::class, 'add'])->name('reviews.add');
+    Route::post('/reviews', [AddReview::class, 'add'])->name('reviews.add');
 
-    Route::post('/reviews/{id}', [AddReview::class, 'delete'])->name('reviews.delete');
-
+    Route::delete('/reviews/{review}', [AddReview::class, 'delete'])->name('reviews.delete');
 
     Route::get('/services/{service}', function (Service $service) {
-        return view('pages.service', compact('service'));
+        $others = Service::whereKeyNot($service->id)->get();
+        return view('pages.service', compact('service', 'others'));
     })->name('service.show');
 
-    Route::post('/services/{service}', [UpdateService::class, 'update'])->name('service.update');
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/services/{service}', [UpdateService::class, 'update'])->name('service.update');
 });
 
 require __DIR__.'/auth.php';

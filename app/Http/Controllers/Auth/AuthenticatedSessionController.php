@@ -56,16 +56,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-    // Check if the request expects JSON (AJAX logout)
-    if ($request->expectsJson()) {
-        return response()->json([
-            'message' => 'Logout successful',
-            'status' => true,
-        ], 200);
-    }
-
-    // For non-AJAX requests, redirect with a success message
-    return redirect('/login')
-        ->with('success', 'Logout successful');
+        return redirect('/login')
+            ->with('success', 'You have been logged out.');
     }
 }

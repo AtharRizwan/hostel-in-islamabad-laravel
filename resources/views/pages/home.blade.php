@@ -1,42 +1,85 @@
 @extends('layouts.app')
 
-@section('title', 'Home - Hostel in Islamabad')
+@section('title', 'Hostel in Islamabad')
 
-@include('partials.header')
+@push('styles')
+    @vite('resources/css/home.css')
+@endpush
 
 @section('content')
 <section class="hero">
-    <h1 class="fade-in color-change">Welcome to Hostel in Islamabad</h1>
-    <p>Experience fun, relaxation, and adventure at our cozy hostel! </p>
-</section>
-<section class="highlights">
-    <h2>What Our Guests Say</h2>
-    <div class="flex">
-        <article>
-            <p>“… well it certainly wasn’t what I expected, but that’s not a bad thing. The hostel area itself is quite a welcoming area …”</p>
-        </article>
-        <article>
-            <p>“As a business owner, I’m constantly looking for new experiences … the facilities offered by the hostel were extraordinary!”</p>
-        </article>
+    <div class="container hero-content">
+        <span class="eyebrow">Cozy hostel in Islamabad</span>
+        <h1 class="fade-in color-change">Welcome to Hostel in Islamabad</h1>
+        <p class="lead">Experience fun, relaxation, and adventure at our cozy hostel!</p>
+        <div class="hero-actions">
+            <a href="{{ route('services') }}" class="btn btn-primary">Explore services</a>
+            <a href="{{ route('about') }}#contact" class="btn btn-ghost">Contact us</a>
+        </div>
+        <ul class="hero-facts">
+            <li>24/7 support</li>
+            <li>Free pick-up &amp; drop-off</li>
+            <li>Breakfast 7&ndash;9 AM</li>
+        </ul>
     </div>
 </section>
-<section class="features">
-    <h2>Our Unique Features</h2>
-    <div class="flex">
-        <div class="feature-item pudding color-change">
-            <p>Hot Chocolate Pudding at 8 PM</p>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <span class="eyebrow">What we offer</span>
+            <h2 class="color-change">Our Unique Features</h2>
+            <p class="lead">Little extras that make your stay feel like home.</p>
         </div>
-        <div class="feature-item breakfast color-change">
-            <p>Freshly Baked Bread & Breakfast</p>
-        </div>
-        <div class="feature-item bike color-change">
-            <p>Bike Hire Available</p>
+        <div class="grid">
+            @foreach ($featured as $service)
+                <a href="{{ route('service.show', $service) }}" class="card card-link">
+                    <div class="card-media">
+                        <img src="{{ asset($service->image_link) }}" alt="" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <h3>{{ $service->name }}</h3>
+                        <p>{{ $service->description }}</p>
+                        <span class="card-more">Learn more &rarr;</span>
+                    </div>
+                </a>
+            @endforeach
         </div>
     </div>
 </section>
-@if (Auth::check() && Auth::user()->role === 'admin'){
-<section class="services-intro">
-    <h1 class="color-change">Admin Access</h1>
+
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-header center">
+            <span class="eyebrow">Testimonials</span>
+            <h2 class="color-change">What Our Guests Say</h2>
+        </div>
+        <div class="quote-grid">
+            <figure class="card quote-card">
+                <blockquote>
+                    <p>… well it certainly wasn’t what I expected, but that’s not a bad thing. The hostel area itself is quite a welcoming area …</p>
+                </blockquote>
+                <figcaption>Hostel guest</figcaption>
+            </figure>
+            <figure class="card quote-card">
+                <blockquote>
+                    <p>As a business owner, I’m constantly looking for new experiences … the facilities offered by the hostel were extraordinary!</p>
+                </blockquote>
+                <figcaption>Business owner</figcaption>
+            </figure>
+        </div>
+    </div>
 </section>
-@endif
+
+<section class="section">
+    <div class="container">
+        <div class="cta-band">
+            <div>
+                <h2 class="color-change">Ready to stay with us?</h2>
+                <p>Questions about rooms, prices or pick-up? Our team replies 24/7.</p>
+            </div>
+            <a href="{{ route('about') }}#contact" class="btn btn-light">Get in touch</a>
+        </div>
+    </div>
+</section>
 @endsection

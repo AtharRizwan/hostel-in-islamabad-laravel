@@ -1,29 +1,14 @@
+// About page: "Show Details" toggle and contact form validation
+
 // Function to toggle the About us section details with an animation
 function toggleDetails() {
     const details = document.querySelector('.about-details');
     const button = document.getElementById('toggleDetailsBtn');
-    
-    if (details.classList.contains('open')) {
-        details.classList.remove('open');
-        button.textContent = 'Show Details';
-        // Use a timeout to hide the element after the transition
-        setTimeout(function timeout() {
-            if (!details.classList.contains('open')) {
-                details.style.display = 'none';
-            }
-        }, 500);
-    } else {
-        details.style.display = 'block';
-        setTimeout(function timeout() { details.classList.add('open')}, 0);
-        button.textContent = 'Hide Details';
-    }
-}
 
-// Initially hide the details
-document.addEventListener('DOMContentLoaded', () => {
-    const details = document.querySelector('.about-details');
-    details.style.display = 'block';
-});
+    const open = details.classList.toggle('open');
+    button.textContent = open ? 'Hide Details' : 'Show Details';
+    button.setAttribute('aria-expanded', open);
+}
 
 function validateEmail(email) {
     // Regular expression to validate email format
@@ -37,9 +22,11 @@ function validateForm() {
     const nameField = document.getElementById('name');
     const emailField = document.getElementById('email');
     const phoneField = document.getElementById('phone');
+    const messageField = document.getElementById('message');
 
     // Clear previous error messages
     document.querySelectorAll('.error-message').forEach(msg => msg.remove());
+    document.querySelectorAll('#contact-form [aria-invalid]').forEach(field => field.removeAttribute('aria-invalid'));
 
     let isValid = true; // Track overall form validity
 
@@ -55,10 +42,16 @@ function validateForm() {
         isValid = false;
     }
 
-    // Validate phone field: only digits
-    const phoneRegex = /^\d+$/;
+    // Validate phone field: digits, spaces and dashes, with an optional leading +
+    const phoneRegex = /^\+?[\d\s-]{7,20}$/;
     if (!phoneRegex.test(phoneField.value.trim())) {
-        displayError(phoneField, "Please enter a valid phone number (digits only)");
+        displayError(phoneField, "Please enter a valid phone number, e.g. +92 300 1234567");
+        isValid = false;
+    }
+
+    // Validate message field
+    if (messageField.value.trim() === '') {
+        displayError(messageField, "Please enter a message");
         isValid = false;
     }
 
@@ -69,31 +62,19 @@ function validateForm() {
 function displayError(inputField, message) {
     const errorSpan = document.createElement('span');
     errorSpan.className = 'error-message';
-    errorSpan.style.color = 'red';
-    errorSpan.style.fontSize = 'small';
     errorSpan.textContent = message;
-    errorSpan.style.color = '#6B0811';
-    errorSpan.style.fontWeight ='bold';
+    inputField.setAttribute('aria-invalid', 'true');
 
     // Append the error message after the input field
     inputField.insertAdjacentElement('afterend', errorSpan);
 }
 
 // Attach validateForm to form submission
-document.getElementById('contact-form').onsubmit = function (event) {
+const contactForm = document.getElementById('contact-form');
+contactForm.onsubmit = function (event) {
     event.preventDefault(); // Stop form submission if validation fails
     if (validateForm()) {
-        const nameField = document.getElementById('name');
-        const emailField = document.getElementById('email');
-        const phoneField = document.getElementById('phone');
-        const messageField = document.getElementById('message');
-
-        nameField.value = '';
-        emailField.value = '';
-        phoneField.value = '';
-        messageField.value = '';
-
+        contactForm.reset();
         alert('Form submitted Successfully');
-    } 
+    }
 };
-
